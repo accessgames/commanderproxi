@@ -1,0 +1,6 @@
+
+  services:
+  - type: proxi
+    name: commanderproxi
+    env: docker
+    plan: free
