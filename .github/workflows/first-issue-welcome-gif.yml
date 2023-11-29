@@ -1,0 +1,33 @@
+name: Welcome GIF on first issue
+
+on:
+  issues:
+    types: [opened]
+
+jobs:
+  welcome:
+    runs-on: ubuntu-latest
+    env:
+      USERNAME: ${{ github.event.issue.user.login }}
+      REPO: ${{ github.repository }}
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+      - name: Check if User's First Issue
+        id: first_issue_check
+        run: |
+          ISSUES=$(curl -H "Authorization: token $GITHUB_TOKEN" \
+          "https://api.github.com/search/issues?q=repo:$REPO+type:issue+author:$USERNAME")
+          ISSUE_COUNT=$(echo $ISSUES | jq '.total_count')
+          if [ $ISSUE_COUNT -eq 1 ]; then
+            echo "::set-output name=is_first_issue::true"
+          else
+            echo "::set-output name=is_first_issue::false"
+          fi
+      - name: Check out repository
+        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11
+      - name: Send welcome GIF
+        if: steps.first_issue_check.outputs.is_first_issue == 'true'
+        run: |
+          curl -X POST -H 'Authorization: token $GITHUB_TOKEN' \
+          -d '{"body": "Hi , there! Welcome to our project! We are very happy to have you here!\n\nHere are some links to get you started:\n\n[Confluence wiki](https://streamstralis.atlassian.net/)\n[GitHub pages site](https://streamstralis.github.io/static/)\n[YouTrack issue tracker](https://streamstralis.youtrack.cloud/projects/36ec271b-193f-4d5f-8a29-a3a835a0ab3c/)\n![Welcome GIF](https://media.tenor.com/3i4MFZS7VyUAAAAC/welcome.gif)"}' \
+          "https://api.github.com/repos/$REPO/issues/${{ github.event.issue.number }}/comments"
