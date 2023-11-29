@@ -5,7 +5,7 @@
     },
     "dependencies": 
     {
-        "sass": "1.69.5"
+        "sass": "1.69.5",
         "express": "4.18.0",
         "http-proxy-middleware": "2.0.5",
         "morgan": "1.10.0"
