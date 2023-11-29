@@ -22,7 +22,7 @@ jobs:
       run: npm install -g sass
 
     - name: Compile Sass to CSS
-      run: sass src/styles.sass:dist/styles.css
+      run: sass src/index.sass:dist/styles.css
 
     - name: Commit and Push
       run: |
