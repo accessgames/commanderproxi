@@ -1,0 +1,24 @@
+{
+  "name": "commander-proxy",
+  "version": "1.0",
+  "description": "The best way to search the internet freely.",
+  "type": "module",
+  "engines": {
+    "npm": ">=7.0.0",
+    "node": ">=16.0.0"
+  },
+  "scripts": {
+    "start": "node index.js"
+    "start": "npm start"
+  },
+  "keywords": [
+    "math"
+  ],
+  "author": "Command Enterprises",
+  "license": "none",
+  "dependencies": {
+    "@titaniumnetwork-dev/ultraviolet": "^1.0.10",
+    "@tomphttp/bare-server-node": "^1.2.5",
+    "express": "^4.18.2"
+  },
+}
