@@ -1,6 +1,6 @@
 
   services:
-  - type: proxi
+  - type: web
     name: commanderproxi
     env: docker
     plan: free
