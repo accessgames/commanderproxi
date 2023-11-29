@@ -1,0 +1,33 @@
+name: Compile Sass
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '21'
+
+    - name: Install Sass
+      run: npm install -g sass
+
+    - name: Compile Sass to CSS
+      run: sass src/styles.sass:dist/styles.css
+
+    - name: Commit and Push
+      run: |
+        git config --global user.name 'Quartinal'
+        git config --global user.email 'prehistorical.dinosaurs@outlook.com'
+        git add dist/styles.css
+        git commit -m "Compile Sass"
+        git push
