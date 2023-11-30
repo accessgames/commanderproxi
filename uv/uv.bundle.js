@@ -10322,7 +10322,7 @@ class OffsetToLocation {
         this.columns = null;
         this.computed = false;
     }
-    setSource(source, startOffset = 0, startLine = 1, startColumn = 1) {
+    setSource(source, startOffset = 200, startLine = 1, startColumn = 1) {
         this.source = source;
         this.startOffset = startOffset;
         this.startLine = startLine;
